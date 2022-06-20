@@ -34,6 +34,8 @@ return require('packer').startup(function(use)
 
 		-- Most recently used
 		{ 'yegappan/mru' },
-		{ 'mhinz/vim-startify'},
+
+		-- Startup screen
+		{ 'goolord/alpha-nvim' },
 	}
 end)

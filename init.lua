@@ -100,14 +100,30 @@ require('lspconfig')['clangd'].setup {
 	capabilities = capabilities
 }
 
-vim.g.startify_custom_header = {
-	'		███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ',
-	'		████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ',
-	'		██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ',
-	'		██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ',
-	'		██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ',
-	'		╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ',
+-- Startup screen
+local alpha = require('alpha')
+local dashboard = require('alpha.themes.dashboard')
+dashboard.section.header.opts.hl = '#abb2bf'
+local banner = {
+	[[███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗]],
+	[[████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║]],
+	[[██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║]],
+	[[██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║]],
+	[[██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║]],
+	[[╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝]],
 }
+dashboard.section.header.val = banner
+dashboard.section.buttons.val = {
+	dashboard.button("<Leader>   f", "  File Browser", ":Telescope file_browser <CR>"),
+	dashboard.button("<Leader> e n", "  New File", ":ene <BAR> startinsert <CR>"),
+	dashboard.button("<Leader> f h", "  Recently Files", ":Telescope oldfiles <CR>"),
+	dashboard.button("<Leader> f t", "  Find Text", ":Telescope live_grep <CR>"),
+	dashboard.button("<Leader> e v", "  Configuration", ":e ~/.config/nvim/lua/config.lua <CR>"),
+	dashboard.button("<Leader>   u", "  Update Plugins", ":PackerUpdate <CR>"),
+	dashboard.button("<Leader>   q", "  Quit Neovim", ":qa<CR>"),
+}
+dashboard.config.opts.noautocmd = true
+alpha.setup(dashboard.opts)
 
 -- Tab settings
 vim.opt.tabstop = 4

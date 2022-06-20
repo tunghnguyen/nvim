@@ -32,9 +32,6 @@ return require('packer').startup(function(use)
 		{ 'hrsh7th/cmp-cmdline' },
 		{ 'hrsh7th/nvim-cmp' },
 
-		-- Most recently used
-		{ 'yegappan/mru' },
-
 		-- Startup screen
 		{ 'goolord/alpha-nvim' },
 	}

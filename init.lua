@@ -45,8 +45,8 @@ require('nvim-lsp-installer').setup({
 local cmp = require('cmp')
 cmp.setup({
 	mapping = cmp.mapping.preset.insert({
-		["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
-		["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "s" }),
+		['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' }),
+		['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 's' }),
 		['<C-b>'] = cmp.mapping.scroll_docs(-4),
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
 		['<C-Space>'] = cmp.mapping.complete(),
@@ -101,7 +101,10 @@ require('lspconfig')['clangd'].setup {
 }
 
 -- Startup screen
-local alpha = require('alpha')
+local status_ok, alpha = pcall(require, 'alpha')
+if not status_ok then
+	return
+end
 local dashboard = require('alpha.themes.dashboard')
 dashboard.section.header.opts.hl = '#abb2bf'
 local banner = {
@@ -114,15 +117,23 @@ local banner = {
 }
 dashboard.section.header.val = banner
 dashboard.section.buttons.val = {
-	dashboard.button("<Leader>   f", "  File Browser", ":Telescope file_browser <CR>"),
-	dashboard.button("<Leader> e n", "  New File", ":ene <BAR> startinsert <CR>"),
-	dashboard.button("<Leader> f h", "  Recently Files", ":Telescope oldfiles <CR>"),
-	dashboard.button("<Leader> f t", "  Find Text", ":Telescope live_grep <CR>"),
-	dashboard.button("<Leader> e v", "  Configuration", ":e ~/.config/nvim/lua/config.lua <CR>"),
-	dashboard.button("<Leader>   u", "  Update Plugins", ":PackerUpdate <CR>"),
-	dashboard.button("<Leader>   q", "  Quit Neovim", ":qa<CR>"),
+	dashboard.button('<Leader>   f', '  File Browser', ':Telescope file_browser <CR>'),
+	dashboard.button('<Leader> e n', '  New File', ':ene <BAR> startinsert <CR>'),
+	dashboard.button('<Leader> f h', '  Recently Files', ':Telescope oldfiles <CR>'),
+	dashboard.button('<Leader> f t', '  Find Text', ':Telescope live_grep <CR>'),
+	dashboard.button('<Leader> e v', '  Configuration', ':e $MYVIMRC<CR>'),
+	dashboard.button('<Leader>   u', '  Update Plugins', ':PackerUpdate <CR>'),
+	dashboard.button('<Leader>   q', '  Quit Neovim', ':qa<CR>'),
 }
-dashboard.config.opts.noautocmd = true
+local function footer()
+	local version = vim.version()
+	local print_version = 'v' .. version.major .. '.' .. version.minor .. '.' .. version.patch
+
+	return print_version
+end
+dashboard.section.footer.opts.hl = '#abb2bf'
+dashboard.section.footer.val = footer()
+dashboard.opts.opts.noautocmd = true
 alpha.setup(dashboard.opts)
 
 -- Tab settings
@@ -141,4 +152,3 @@ vim.opt.termguicolors = true
 vim.opt.splitright = true
 vim.opt.showmode = false
 vim.opt.scrolloff = 8
-

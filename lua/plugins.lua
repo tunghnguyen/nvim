@@ -34,5 +34,6 @@ return require('packer').startup(function(use)
 
 		-- Most recently used
 		{ 'yegappan/mru' },
+		{ 'mhinz/vim-startify'},
 	}
 end)

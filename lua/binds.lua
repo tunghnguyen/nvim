@@ -40,3 +40,10 @@ vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, opts)
 vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action, opts)
 vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
 vim.keymap.set('n', '<Leader>f', vim.lsp.buf.formatting, opts)
+
+-- Telescope
+vim.keymap.set('n', '<leader>ff', ":Telescope find_files<CR>", opts)
+vim.keymap.set('n', '<leader>fg', ":Telescope live_grep<CR>", opts)
+vim.keymap.set('n', '<leader>fb', ":Telescope buffers<CR>", opts)
+vim.keymap.set('n', '<leader>fh', ":Telescope help_tags<CR>", opts)
+

@@ -34,5 +34,15 @@ return require('packer').startup(function(use)
 
 		-- Startup screen
 		{ 'goolord/alpha-nvim' },
+
+		-- Telescopt
+		{
+			'nvim-telescope/telescope.nvim',
+			requires = {
+				{ 'nvim-lua/plenary.nvim' },
+				{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+			}
+		},
+		{ 'nvim-telescope/telescope-project.nvim' }
 	}
 end)

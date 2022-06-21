@@ -117,11 +117,10 @@ local banner = {
 }
 dashboard.section.header.val = banner
 dashboard.section.buttons.val = {
-	dashboard.button('<Leader>   f', '  File Browser', ':Telescope file_browser <CR>'),
 	dashboard.button('<Leader> e n', '  New File', ':ene <BAR> startinsert <CR>'),
-	dashboard.button('<Leader> f h', '  Recently Files', ':Telescope oldfiles <CR>'),
-	dashboard.button('<Leader> f t', '  Find Text', ':Telescope live_grep <CR>'),
-	dashboard.button('<Leader> e v', '  Configuration', ':e $MYVIMRC<CR>'),
+	dashboard.button('<Leader> f r', '  Recent Files', ':Telescope oldfiles <CR>'),
+	dashboard.button('<Leader> f p', '  Find Project', ':Telescope project <CR>'),
+	dashboard.button('<Leader> e v', '  Configuration', ':e $MYVIMRC <CR>'),
 	dashboard.button('<Leader>   u', '  Update Plugins', ':PackerUpdate <CR>'),
 	dashboard.button('<Leader>   q', '  Quit Neovim', ':qa<CR>'),
 }
@@ -131,10 +130,20 @@ local function footer()
 
 	return print_version
 end
-dashboard.section.footer.opts.hl = '#abb2bf'
 dashboard.section.footer.val = footer()
 dashboard.opts.opts.noautocmd = true
 alpha.setup(dashboard.opts)
+
+-- Telescope
+local telescope = require('telescope')
+telescope.load_extension('project')
+telescope.setup {
+	extensions = {
+		project = {
+			hidden_files = false,
+		}
+	}
+}
 
 -- Tab settings
 vim.opt.tabstop = 4

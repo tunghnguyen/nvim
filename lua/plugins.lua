@@ -43,6 +43,9 @@ return require('packer').startup(function(use)
 				{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 			}
 		},
-		{ 'nvim-telescope/telescope-project.nvim' }
+		{ 'nvim-telescope/telescope-project.nvim' },
+
+		-- Snippet
+		{ 'L3MON4D3/LuaSnip' },
 	}
 end)

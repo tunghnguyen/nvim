@@ -44,6 +44,11 @@ require('nvim-lsp-installer').setup({
 
 local cmp = require('cmp')
 cmp.setup({
+	snippet = {
+      expand = function(args)
+        require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+      end,
+    },
 	mapping = cmp.mapping.preset.insert({
 		['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' }),
 		['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 's' }),
@@ -86,7 +91,8 @@ cmp.setup.cmdline(':', {
 
 -- Setup lspconfig
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-require('lspconfig')['sumneko_lua'].setup {
+local lspconfig = require('lspconfig')
+lspconfig['sumneko_lua'].setup {
 	capabilities = capabilities,
 	settings = {
 		Lua = {
@@ -96,7 +102,7 @@ require('lspconfig')['sumneko_lua'].setup {
 		},
 	}
 }
-require('lspconfig')['clangd'].setup {
+lspconfig['clangd'].setup {
 	capabilities = capabilities
 }
 

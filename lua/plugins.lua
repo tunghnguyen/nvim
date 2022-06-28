@@ -16,14 +16,10 @@ return require('packer').startup(function(use)
 		-- Status line
 		{ 'nvim-lualine/lualine.nvim' },
 
-		-- Language server installer
+		-- Config for language servers
 		{ 'williamboman/nvim-lsp-installer' },
 
-		-- Config for language servers
-		{
-			'neovim/nvim-lspconfig',
-			after = 'nvim-lsp-installer',
-		},
+		{ 'neovim/nvim-lspconfig' },
 
 		-- Complete engine
 		{ 'hrsh7th/cmp-nvim-lsp' },

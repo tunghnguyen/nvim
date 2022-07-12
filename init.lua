@@ -105,6 +105,9 @@ lspconfig['sumneko_lua'].setup {
 lspconfig['clangd'].setup {
 	capabilities = capabilities
 }
+lspconfig['rust_analyzer'].setup {
+	capabilities = capabilities
+}
 
 -- Startup screen
 local status_ok, alpha = pcall(require, 'alpha')

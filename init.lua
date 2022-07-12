@@ -126,12 +126,12 @@ local banner = {
 }
 dashboard.section.header.val = banner
 dashboard.section.buttons.val = {
-	dashboard.button('<Leader> e n', '  New File', ':ene <BAR> startinsert <CR>'),
-	dashboard.button('<Leader> f r', '  Recent Files', ':Telescope oldfiles <CR>'),
+	dashboard.button('<Leader> e n', '  New File', ':ene <BAR> startinsert <CR>'),
+	dashboard.button('<Leader> f r', '  Recent Files', ':Telescope oldfiles <CR>'),
 	dashboard.button('<Leader> f p', '  Find Project', ':Telescope project <CR>'),
 	dashboard.button('<Leader> e v', '  Configuration', ':e $MYVIMRC <CR>'),
 	dashboard.button('<Leader>   u', '  Update Plugins', ':PackerUpdate <CR>'),
-	dashboard.button('<Leader>   q', '  Quit Neovim', ':qa<CR>'),
+	dashboard.button('<Leader>   q', '  Quit Neovim', ':qa<CR>'),
 }
 local function footer()
 	local version = vim.version()

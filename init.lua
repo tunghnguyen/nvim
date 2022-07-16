@@ -10,6 +10,7 @@ require('impatient')
 -- Colorscheme
 local onedark = require('onedark')
 onedark.setup {
+	transparent = true,
 	code_style = {
 		comments = 'none'
 	},
@@ -107,6 +108,18 @@ lspconfig['clangd'].setup {
 }
 lspconfig['rust_analyzer'].setup {
 	capabilities = capabilities
+}
+
+-- Syntax highlighting
+require('nvim-treesitter.configs').setup {
+	ensure_installed = { "c", "cpp", "lua", "rust" },
+	sync_install = true,
+	highlight = {
+		enable = true,
+	},
+	indent = {
+		enable = true,
+	}
 }
 
 -- Startup screen

@@ -128,7 +128,7 @@ if not status_ok then
 	return
 end
 local dashboard = require('alpha.themes.dashboard')
-dashboard.section.header.opts.hl = '#abb2bf'
+dashboard.section.header.opts.hl = 'abb2bf'
 local banner = {
 	[[███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗]],
 	[[████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║]],

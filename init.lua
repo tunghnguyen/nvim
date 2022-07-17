@@ -91,9 +91,31 @@ cmp.setup.cmdline(':', {
 })
 
 -- Setup lspconfig
+local on_attach = function(client, bufnr)
+	-- Mappings.
+	-- See `:help vim.lsp.*` for documentation on any of the below functions
+	local bufopts = { noremap=true, silent=true, buffer=bufnr }
+	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+	vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+	vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+	vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+	vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+	vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+	vim.keymap.set('n', '<space>wl', function()
+		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+	end, bufopts)
+	vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+	vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+	vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+	vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+	vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+end
+
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
 lspconfig['sumneko_lua'].setup {
+	on_attach = on_attach,
 	capabilities = capabilities,
 	settings = {
 		Lua = {
@@ -104,11 +126,36 @@ lspconfig['sumneko_lua'].setup {
 	}
 }
 lspconfig['clangd'].setup {
+	on_attach = on_attach,
 	capabilities = capabilities
 }
 lspconfig['rust_analyzer'].setup {
+	on_attach = on_attach,
 	capabilities = capabilities
 }
+
+vim.diagnostic.config({
+  virtual_text = false,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = false,
+})
+
+vim.o.updatetime = 250
+vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})]]
+
+vim.cmd [[
+  highlight! DiagnosticLineNrError guibg=#51202A guifg=#FF0000 gui=bold
+  highlight! DiagnosticLineNrWarn guibg=#51412A guifg=#FFA500 gui=bold
+  highlight! DiagnosticLineNrInfo guibg=#1E535D guifg=#00FFFF gui=bold
+  highlight! DiagnosticLineNrHint guibg=#1E205D guifg=#0000FF gui=bold
+
+  sign define DiagnosticSignError text= texthl=DiagnosticSignError linehl= numhl=DiagnosticLineNrError
+  sign define DiagnosticSignWarn text= texthl=DiagnosticSignWarn linehl= numhl=DiagnosticLineNrWarn
+  sign define DiagnosticSignInfo text= texthl=DiagnosticSignInfo linehl= numhl=DiagnosticLineNrInfo
+  sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=DiagnosticLineNrHint
+]]
 
 -- Syntax highlighting
 require('nvim-treesitter.configs').setup {

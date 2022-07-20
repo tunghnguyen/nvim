@@ -142,6 +142,7 @@ vim.diagnostic.config({
   severity_sort = false,
 })
 
+vim.o.pumheight = 10
 vim.o.updatetime = 250
 vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})]]
 
@@ -165,7 +166,7 @@ require('nvim-treesitter.configs').setup {
 		enable = true,
 	},
 	indent = {
-		enable = true,
+		enable = true
 	}
 }
 
@@ -213,6 +214,9 @@ telescope.setup {
 		}
 	}
 }
+
+-- Autopair
+require('nvim-autopairs').setup{}
 
 -- Tab settings
 vim.opt.tabstop = 4

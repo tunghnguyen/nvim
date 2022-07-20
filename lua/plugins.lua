@@ -14,7 +14,7 @@ return require('packer').startup(function(use)
 		{ 'navarasu/onedark.nvim' },
 
 		-- Status line
---		{ 'nvim-lualine/lualine.nvim' },
+		{ 'nvim-lualine/lualine.nvim' },
 
 		-- Config for language servers
 		{ 'williamboman/nvim-lsp-installer' },
@@ -46,5 +46,8 @@ return require('packer').startup(function(use)
 
 		-- Syntax highlighting
 		{ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
+
+		-- Powerful autopair
+		{ 'windwp/nvim-autopairs' },
 	}
 end)
